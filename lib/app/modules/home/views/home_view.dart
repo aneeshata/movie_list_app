@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:movie_list_app/app/data/movie_name_list_response.dart';
-import 'package:movie_list_app/app/modules/movie_detail_view/views/movie_detail_view_view.dart';
 
 import '../../../routes/app_pages.dart';
 import '../controllers/home_controller.dart';
@@ -80,7 +79,7 @@ class HomeView extends GetView<HomeController> {
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Text(snapshot.data?.title ?? '',
-                                          style: TextStyle(fontSize: 15.0,
+                                          style: TextStyle(fontSize: 12.0,
                                               fontFamily: 'serif',
                                               fontWeight: FontWeight.bold,
                                               color: Colors.black),),

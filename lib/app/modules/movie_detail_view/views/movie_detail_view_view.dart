@@ -13,71 +13,80 @@ class MovieDetailViewView extends GetView<MovieDetailViewController> {
     print('Received data: $movieData');
     print('Value from data: $movieData');
 
-    // Assuming movieData.ratings is a List<String>
-    List<Widget> ratingWidgets = movieData.ratings?.map((rating) {
-      return Text('Rating: $rating', style: TextStyle(
-        fontWeight: FontWeight.normal,
-        color: Colors.black,
-        fontSize: 12,
-        fontFamily: 'sans-serif',
-      ));
-    }).toList() ?? [];
     return Scaffold(
 
       appBar: AppBar(
-        title: const Text('MovieDetailViewView'),
+        title: const Text('MovieDetail view'),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors:  [Color(0xFFFF0080), Color(0xFFFF4A4A)], // Define your gradient colors
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
         centerTitle: true,
       ),
-      body: Center(
+      body:SafeArea(
+    child: ListView(
+    scrollDirection: Axis.vertical,
+      children: [Container(
+        height: 844,
+        decoration: BoxDecoration(color: const Color(0xffffffff),
+          borderRadius: BorderRadius.circular(19),),
         child: Stack(
-          alignment: Alignment.center,
           children: [
-            Container(
-              width: 300,
-              height: 400,
-
-              decoration: BoxDecoration(color:Colors.white,boxShadow: [new BoxShadow(color: Colors.grey,blurRadius: 10.0)]),
+            Stack(
+              children: [
+                Positioned(child: Image.network(movieData.poster ?? '',fit: BoxFit.cover,width: MediaQuery.of(context).size.width,height: 469,))
+              ],
             ),
-            Positioned(
-              top: 0,
-              left: 0,// Adjust as needed
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Image.network(movieData.poster ?? '',width: 80,height: 100,fit: BoxFit.cover,),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10.0),
+            Stack(
+              children: [
+                Positioned(
+                    left: 0,
+                    top: 250,
+                    child: Container(
+                      height:440,width:MediaQuery.of(context).size.width,decoration: const BoxDecoration(color: Colors.white,borderRadius: BorderRadius.only(topLeft: Radius.circular(30.0),topRight: Radius.circular(30.0))),
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 30.0,top: 20.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(movieData.title ?? '',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black,fontSize: 12,fontFamily: 'san-serif'),),
-                            Text('Language :${movieData.language ?? ''}',style: TextStyle(fontWeight: FontWeight.normal,color: Colors.black,fontSize: 12,fontFamily: 'san-serif'),),
-                            Text('Year :${movieData.year ?? ''}',style: TextStyle(fontWeight: FontWeight.normal,color: Colors.black,fontSize: 12,fontFamily: 'san-serif'),),
-                            Text('Genre :${movieData.genre ?? ''}',style: TextStyle(fontWeight: FontWeight.normal,color: Colors.black,fontSize: 12,fontFamily: 'san-serif'),),
+                            // Text('INFO',style: TextStyle(fontFamily: 'serif',fontSize: 16,fontWeight: FontWeight.bold,color: Colors.black),),
+                            SizedBox(height: 20.0,),
+                            Text(movieData.title ?? '',style: TextStyle(fontFamily: 'serif',fontSize: 14,fontWeight: FontWeight.bold,color: Colors.black),),
+                            SizedBox(height: 6.0,),
+                            Text(movieData.genre ?? '',style: TextStyle(fontFamily: 'serif',fontSize: 12,fontWeight: FontWeight.normal,color: Colors.black),),
+                            SizedBox(height: 6.0,),
+                            Text('Language : ${movieData.language ?? ' '}',style: TextStyle(fontFamily: 'serif',fontSize: 12,fontWeight: FontWeight.normal,color: Colors.black),),
 
+                            SizedBox(height: 6.0,),
+                            Text('Director : ${movieData.director ?? ' '}',style: TextStyle(fontFamily: 'serif',fontSize: 12,fontWeight: FontWeight.normal,color: Colors.black),),
+                           SizedBox(height: 6.0,),
+                            Text('Actors : ${movieData.actors ?? ' '}',style: TextStyle(fontFamily: 'serif',fontSize: 12,fontWeight: FontWeight.normal,color: Colors.black),),
+                            SizedBox(height: 6.0,),
+                            Text('Awards : ${movieData.awards ?? ' '}',style: TextStyle(fontFamily: 'serif',fontSize: 12,fontWeight: FontWeight.normal,color: Colors.black),),
+                            SizedBox(height: 6.0,),
+                            Text('Released Date : ${movieData.released ?? ' '}',style: TextStyle(fontFamily: 'serif',fontSize: 12,fontWeight: FontWeight.normal,color: Colors.black),),
+                            SizedBox(height: 6.0,),
+                            Text('Year : ${movieData.year ?? ' '}',style: TextStyle(fontFamily: 'serif',fontSize: 12,fontWeight: FontWeight.normal,color: Colors.black),),
+                            SizedBox(height: 6.0,),
+                            Text('Response : ${movieData.response ?? ' '}',style: TextStyle(fontFamily: 'serif',fontSize: 12,fontWeight: FontWeight.normal,color: Colors.black),),
+                            SizedBox(height: 6.0,),
+                            Text('ImdRating : ${movieData.imdbRating ?? ''}',style: TextStyle(fontFamily: 'serif',fontSize: 12,fontWeight: FontWeight.normal,color: Colors.black),),
                           ],
                         ),
-                      )
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                           Text('INFO',style: TextStyle(fontFamily: 'serif',fontSize: 17,fontWeight: FontWeight.bold),),
-
-                        ],
-                      )
-                    ],
-                  )
-                ],
-              ),
-            ),
+                      ),))
+              ],
+            )
           ],
         ),
-      ),
+
+      )],
+    ),
+    )
     );
   }
 }
